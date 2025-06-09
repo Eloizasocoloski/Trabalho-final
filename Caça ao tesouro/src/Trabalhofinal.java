@@ -10,14 +10,21 @@ public class Trabalhofinal {
     Random ran =  new Random();
 
     System.out.println("Digite as coordenadas para a escavação (linha e coluna, separadas por espaço)");
-    for(int i=0; i< mapa.length; i++){
-        for(int j=0; j< mapa[i].length; i++)
-        System.out.println((i+1)+"~");
-    }
-    for(int i = 0; i<5; i++){
-        int armadilha = (ran.nextInt(5));
-    }
 
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                mapa[i][j] = '~';
+            }
+        }
 
-    }
-}
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                System.out.print(mapa[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+            }
+        }
+    
+
