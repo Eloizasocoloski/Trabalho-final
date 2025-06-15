@@ -2,114 +2,169 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Trabalhofinal {
-
-    public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
-        // logica pontuacao:
-        // int pontuacaoJogador = 0;
-        // int bonusTesouro = 10;
-        // int descontoArmadilha = -5;
-
-        // if (achou tesouro) {
-        //     pontuacaoJogador +=  bonusTesouro
-        // }
-        // if (achou armadilha) {
-        //     pontuacaoJogador += descontoArmadilha
-        // }
-        char[][] mapa = new char[8][8];
+        char [][] mapa = new char [8][8];
+        int pontuacao = 0;
+        int tesourosEncontrados = 0;
+        int tentativas = 0;
+        final int maxTentativas = 25;
+        final int maxTesouros = 8;
+        Scanner scanner = new Scanner(System.in);
         Random ran = new Random();
 
-        System.out.println("Digite as coordenadas para a escavação (linha e coluna, separadas por espaço)");
-        mapa = construirMapa(mapa);
-
-        // for (int i = 0; i < 8; i++) {
-        //     for (int j = 0; j < 8; j++) {
-        //         System.out.print(mapa[i][j] + " ");
-        //     }
-        //     System.out.println();
-        // }
-
-        construirTesouros(mapa);
-        construirArmadilhas(mapa);
-        printarMapa(mapa);
+    public static void main(String[] args) {
+        Trabalhofinal caca = new Trabalhofinal();
+        caca.executar();
     }
+    public void executar(){
+            System.out.println("Bem vindo a caçada, jogador!");
+            construirMapa();
+            construirTesouros();
+            construirArmadilhas();
 
-    static char[][] construirMapa(char[][] mapa) {
+            while(tentativas < maxTentativas && tesourosEncontrados < maxTesouros){
+                System.out.println("Rodada" + (tentativas + 1));
+                printarMapa();
+                int i = pedirCoordenada("linha");
+                int j = pedirCoordenada("coluna");
+
+                if(coordenadasValidas(i, j)){
+                    char resultado = mapa[i][j];
+                    if(resultado == 't'){
+                        System.out.println("Você encontrou um tesouro! +10 pontos");
+                        ganharPontos(10);
+                        tesourosEncontrados++;
+                        mapa[i][j] = 'X';
+
+                    } else if(resultado == 'a'){
+                        System.out.println("Ops, você caiu em uma armadilha. -5 pontos");
+                        perderPontos(5);
+                        mapa[i][j] = 'X';
+
+                    } else if(resultado == 'X'){
+                        System.out.println("Você já escavou aqui antes!");
+                    } else{
+                        System.out.println("Nada de tesouros por aqui, somente areia...");
+                        mapa[i][j] = 'X';
+                    }
+                    mostrarPontuacao();
+                } else{
+                    System.out.println("Coordenadas Inválidas, tente novamente.");
+                }
+                tentativas++;
+            }
+            System.out.println("Mapa completo: ");
+            printarMapaCompleto();
+
+            System.out.println("Pontuação final: " + pontuacao);
+            if(tesourosEncontrados == maxTesouros){
+                System.out.println("Parabéns, você encontrou todos os tesouros!");
+            }else if(tentativas == maxTentativas){
+                System.out.println("Você usou todas as tentativas possíveis.");
+            }
+            
+            if(pontuacao >=70){
+                System.out.println("Explorador Lendário!");
+            }else if(pontuacao >=50){
+                System.out.println("Caçador de tesouros experiente!");
+            }else if(pontuacao >=30){
+                System.out.println("Aventureiro iniciante!");
+            }else{
+                System.out.println("Precisa de mais prática na exploração.");
+            }
+            scanner.close();
+    }
+    void construirMapa() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 mapa[i][j] = '~';
             }
         }
-        return mapa;
+    
     }
 
-    static void construirArmadilhas(char[][] mapa) {
-        Random ran = new Random();
-        int[] sortearArmadilhay = new int[5];
-        int[] sortearArmadilhaX = new int[5];
-        for (int i = 0; i < 5; i++) {
-            sortearArmadilhaX[i] = ran.nextInt(8);
-            sortearArmadilhay[i] = ran.nextInt(8);
-            //System.out.println(sortearTesouroX[i] + " - " + sortearTesouroy[i]);
-        }
-
-        int contador = 0;
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                if (contador < 5) {
-                    int posicaox = sortearArmadilhaX[i];
-                    int posicaoy = sortearArmadilhay[j];
-                    //System.out.println(posicaox);
-                    //System.out.println(posicaoy);
-                    if (mapa[posicaox][posicaoy] != 't' || mapa[posicaox][posicaoy] != '~') {
-                        mapa[posicaox][posicaoy] = 'a';
-                    }
-                }
-                contador++;
+    void printarMapa(){
+        System.out.println("Mapa atual(coordenadas): ");
+        System.out.println(" ");
+        for(int j=0; j<8; j++){
+                System.out.print(j+ " ");
             }
-        }
-    }
+            System.out.println();
 
-    static void construirTesouros(char[][] mapa) {
-        Random ran = new Random();
-        int[] sortearTesouroy = new int[8];
-        int[] sortearTesouroX = new int[8];
-        for (int i = 0; i < 8; i++) {
-            sortearTesouroX[i] = ran.nextInt(8);
-            sortearTesouroy[i] = ran.nextInt(8);
-            //System.out.println(sortearTesouroX[i] + " - " + sortearTesouroy[i]);
-        }
+            for(int i=0; i<8; i++){
+                System.out.print(i+ " ");
+                for(int j=0; j<8; j++){
+                    char celula =  mapa[i][j];
 
-        int contador = 0;
-        for (int i = 0; i < 8; i++) {
-
-            for (int j = 0; j < 8; j++) {
-                if (contador < 9) {
-                    int posicaox = sortearTesouroX[i];
-                    int posicaoy = sortearTesouroy[j];
-                    //System.out.println(posicaox);
-                    //System.out.println(posicaoy);
-                    if (mapa[posicaox][posicaoy] != 't' || mapa[posicaox][posicaoy] != '~') {
-                        mapa[posicaox][posicaoy] = 't';
-                    }
+                    if(celula =='t' || celula == 'a'){
+                        System.out.print("~");
+                    }else{
+                    System.out.print(celula + " ");
                 }
-                contador++;
+                System.out.println();
             }
+
         }
     }
-
-    static void printarMapa(char[][] mapa) {
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-            System.out.print(mapa[i][j] + " ");
+    void printarMapaCompleto(){
+        System.out.print("Mapa completo: ");
+        System.out.print(" ");
+        for(int j=0; j<8;j++){
+            System.out.print(j + " ");
         }
         System.out.println();
+
+        for(int i=0; i<8; i++){
+            System.out.print(i + " ");
+            for(int j=0; j<8; j++){
+                System.out.print(mapa[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 
-}
+    void construirArmadilhas() {
+        int contador = 0;
+        while (contador < 5) {
+            int i = ran.nextInt(8);
+            int j = ran.nextInt(8);
+            if(mapa[i][j] == '~'){
+                mapa[i][j] = 'a';
+                contador++;
+            }
+        }
+    }
 
-}
+    void construirTesouros() {
+       int contador = 0;
+       while(contador <maxTesouros){
+          int i = ran.nextInt(8);
+          int j = ran.nextInt(8);
+          if (mapa[i][j] =='~'){
+                mapa[i][j] = 't';
+                contador++; 
+            }
+        }
+    }  
 
+    public int pedirCoordenada(String tipoCoordenada){
+        System.out.print("Digite as coordenadas para escavação" + tipoCoordenada + " (0 a 7): ");
+        return scanner.nextInt();
+    }
+    public boolean coordenadasValidas(int i, int j){
+        return i>=0 && i < 8 && j >=0 && j <8;
+    }
+    public void ganharPontos(int pontos){
+        pontuacao +=pontos;
+    }
+    public void perderPontos(int pontos){
+        pontuacao -= pontos;
+    }
+    public void mostrarPontuacao(){
+        System.out.println("Pontuação atual: " + pontuacao);
+    }
+    
+}
+//fim do código
         
     
 
