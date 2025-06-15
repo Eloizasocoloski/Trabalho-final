@@ -36,8 +36,10 @@ public class Trabalhofinal {
 
     static char[][] construirMapa(char[][] mapa) {
         for (int i = 0; i < 8; i++) {
+        
             for (int j = 0; j < 8; j++) {
                 mapa[i][j] = '~';
+           
             }
         }
         return mapa;
@@ -99,12 +101,16 @@ public class Trabalhofinal {
     }
 
     static void printarMapa(char[][] mapa) {
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-            System.out.print(mapa[i][j] + " ");
-        }
+        System.out.print("   ");
+        for (int j = 0; j < 8; j++) System.out.print((j + 1) + " ");
         System.out.println();
-    }
+        for (int i = 0; i < 8; i++) {
+            System.out.print((i + 1) + "  ");
+            for (int j = 0; j < 8; j++) {
+                System.out.print(mapa[i][j] + " ");
+            }
+            System.out.println();
+        }
 
 }
 
