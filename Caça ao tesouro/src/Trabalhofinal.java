@@ -87,29 +87,27 @@ public class Trabalhofinal {
     }
 
     void printarMapa(){
-        System.out.println("Mapa atual(coordenadas): ");
-        System.out.println(" ");
-        for(int j=0; j<8; j++){
-                System.out.print(j + " ");
-            }
-            System.out.println();
-
-            for(int i=0; i<8; i++){
-                System.out.print(i+ " ");
-
-                for(int j=0; j<8; j++){
-                    char celula =  mapa[i][j];
-
-                    if(celula =='t' || celula == 'a'){
-                        System.out.print("~");
-                    }else{
-                    System.out.print(celula + " ");
-                }
-                System.out.println();
-            }
-
-        }
+    System.out.println("Mapa atual (coordenadas): ");
+    System.out.print("  "); // espaçamento para alinhar os índices das colunas
+    for(int j = 0; j < 8; j++){
+        System.out.print(j + " ");
     }
+    System.out.println();
+
+    for(int i = 0; i < 8; i++){
+        System.out.print(i + " ");
+        for(int j = 0; j < 8; j++){
+            char celula = mapa[i][j];
+            if(celula == 't' || celula == 'a'){
+                System.out.print("~ ");
+            } else {
+                System.out.print(celula + " ");
+            }
+        }
+        System.out.println(); // <-- agora está no lugar certo!
+    }
+}
+
     void printarMapaCompleto(){
         System.out.print("Mapa completo: ");
         System.out.print(" ");
@@ -154,7 +152,7 @@ public class Trabalhofinal {
     }  
 
     public int [] pedirCoordenadas(){
-        System.out.print("Digite as coordenadas para escavação: ");
+        System.out.print("Digite as coordenadas para escavação(linha e coluna, separados por espaço): ");
         int i = scanner.nextInt();
         int j = scanner.nextInt();
         return new int[] {i, j};
