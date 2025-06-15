@@ -30,7 +30,7 @@ public class Trabalhofinal {
         // }
 
         construirTesouros(mapa);
-
+        construirArmadilhas(mapa);
         printarMapa(mapa);
     }
 
@@ -43,45 +43,74 @@ public class Trabalhofinal {
         return mapa;
     }
 
-    static void construirTesouros(char[][] mapa) {
+    static void construirArmadilhas(char[][] mapa) {
         Random ran = new Random();
-        int[] sortearTesouroy = new int[5];
-        int[] sortearTesouroX = new int[5];
+        int[] sortearArmadilhay = new int[5];
+        int[] sortearArmadilhaX = new int[5];
         for (int i = 0; i < 5; i++) {
-            sortearTesouroX[i] = ran.nextInt(8);
-            sortearTesouroy[i] = ran.nextInt(8);
-            System.out.println(sortearTesouroX[i] + " - " + sortearTesouroy[i]);
+            sortearArmadilhaX[i] = ran.nextInt(8);
+            sortearArmadilhay[i] = ran.nextInt(8);
+            //System.out.println(sortearTesouroX[i] + " - " + sortearTesouroy[i]);
         }
 
         int contador = 0;
         for (int i = 0; i < 4; i++) {
-
             for (int j = 0; j < 4; j++) {
                 if (contador < 5) {
+                    int posicaox = sortearArmadilhaX[i];
+                    int posicaoy = sortearArmadilhay[j];
+                    //System.out.println(posicaox);
+                    //System.out.println(posicaoy);
+                    if (mapa[posicaox][posicaoy] != 't' || mapa[posicaox][posicaoy] != '~') {
+                        mapa[posicaox][posicaoy] = 'a';
+                    }
+                }
+                contador++;
+            }
+        }
+    }
+
+    static void construirTesouros(char[][] mapa) {
+        Random ran = new Random();
+        int[] sortearTesouroy = new int[8];
+        int[] sortearTesouroX = new int[8];
+        for (int i = 0; i < 8; i++) {
+            sortearTesouroX[i] = ran.nextInt(8);
+            sortearTesouroy[i] = ran.nextInt(8);
+            //System.out.println(sortearTesouroX[i] + " - " + sortearTesouroy[i]);
+        }
+
+        int contador = 0;
+        for (int i = 0; i < 8; i++) {
+
+            for (int j = 0; j < 8; j++) {
+                if (contador < 9) {
                     int posicaox = sortearTesouroX[i];
                     int posicaoy = sortearTesouroy[j];
-                    // System.out.println(posicaox);
-                    // System.out.println(posicaoy);
-                    if (mapa[posicaox][posicaoy] != 't' || mapa[posicaox][posicaoy] != 'a') {
+                    //System.out.println(posicaox);
+                    //System.out.println(posicaoy);
+                    if (mapa[posicaox][posicaoy] != 't' || mapa[posicaox][posicaoy] != '~') {
                         mapa[posicaox][posicaoy] = 't';
                     }
                 }
-                contador = +1;
+                contador++;
             }
         }
     }
 
     static void printarMapa(char[][] mapa) {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (mapa[i][j] != 't' && mapa[i][j] != 'a') {
-                    // System.out.println("Tem t:" + mapa[i][j] + " ");
-                    System.out.print(mapa[i][j] + " ");
-                } else {
-                    System.out.print("~" + " ");
-                }
-            }
-            System.out.println();
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            System.out.print(mapa[i][j] + " ");
         }
+        System.out.println();
     }
+
 }
+
+}
+
+        
+    
+
+
