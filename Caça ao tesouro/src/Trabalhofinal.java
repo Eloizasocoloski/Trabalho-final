@@ -35,12 +35,12 @@ public class Trabalhofinal {
                         System.out.println("Você encontrou um tesouro! +10 pontos");
                         ganharPontos(10);
                         tesourosEncontrados++;
-                        mapa[i][j] = 'X';
+                        mapa[i][j] = 't';
 
                     } else if(resultado == 'a'){
                         System.out.println("Ops, você caiu em uma armadilha. -5 pontos");
                         perderPontos(5);
-                        mapa[i][j] = 'X';
+                        mapa[i][j] = 'a';
 
                     } else if(resultado == 'X'){
                         System.out.println("Você já escavou aqui antes!");
@@ -88,7 +88,7 @@ public class Trabalhofinal {
 
     void printarMapa(){
     System.out.println("Mapa atual (coordenadas): ");
-    System.out.print("  "); // espaçamento para alinhar os índices das colunas
+    System.out.print("  "); 
     for(int j = 0; j < 8; j++){
         System.out.print(j + " ");
     }
@@ -104,7 +104,7 @@ public class Trabalhofinal {
                 System.out.print(celula + " ");
             }
         }
-        System.out.println(); // <-- agora está no lugar certo!
+        System.out.println(); 
     }
 }
 
@@ -130,8 +130,8 @@ public class Trabalhofinal {
     void construirArmadilhas() {
         int contador = 0;
         while (contador < 5) {
-            int i = ran.nextInt(8);
-            int j = ran.nextInt(8);
+            int i = ran.nextInt(5);
+            int j = ran.nextInt(5);
             if(mapa[i][j] == '~'){
                 mapa[i][j] = 'a';
                 contador++;
