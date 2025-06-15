@@ -24,8 +24,10 @@ public class Trabalhofinal {
             while(tentativas < maxTentativas && tesourosEncontrados < maxTesouros){
                 System.out.println("Rodada" + (tentativas + 1));
                 printarMapa();
-                int i = pedirCoordenada("linha");
-                int j = pedirCoordenada("coluna");
+
+                int[] coordenadas = pedirCoordenadas();
+                int i = coordenadas[0];
+                int j = coordenadas[1];
 
                 if(coordenadasValidas(i, j)){
                     char resultado = mapa[i][j];
@@ -88,12 +90,13 @@ public class Trabalhofinal {
         System.out.println("Mapa atual(coordenadas): ");
         System.out.println(" ");
         for(int j=0; j<8; j++){
-                System.out.print(j+ " ");
+                System.out.print(j + " ");
             }
             System.out.println();
 
             for(int i=0; i<8; i++){
                 System.out.print(i+ " ");
+
                 for(int j=0; j<8; j++){
                     char celula =  mapa[i][j];
 
@@ -107,7 +110,6 @@ public class Trabalhofinal {
 
         }
     }
-<<<<<<< HEAD
     void printarMapaCompleto(){
         System.out.print("Mapa completo: ");
         System.out.print(" ");
@@ -119,25 +121,14 @@ public class Trabalhofinal {
         for(int i=0; i<8; i++){
             System.out.print(i + " ");
             for(int j=0; j<8; j++){
-=======
-
-    static void printarMapa(char[][] mapa) {
-        System.out.print("   ");
-        for (int j = 0; j < 8; j++) System.out.print((j + 1) + " ");
-        System.out.println();
-        for (int i = 0; i < 8; i++) {
-            System.out.print((i + 1) + "  ");
-            for (int j = 0; j < 8; j++) {
->>>>>>> c2f51fbd89055768e4d2612539125724ef10434f
                 System.out.print(mapa[i][j] + " ");
             }
             System.out.println();
         }
-<<<<<<< HEAD
-    }
-=======
->>>>>>> c2f51fbd89055768e4d2612539125724ef10434f
+            
 
+    }
+    
     void construirArmadilhas() {
         int contador = 0;
         while (contador < 5) {
@@ -162,9 +153,11 @@ public class Trabalhofinal {
         }
     }  
 
-    public int pedirCoordenada(String tipoCoordenada){
-        System.out.print("Digite as coordenadas para escavação" + tipoCoordenada + " (0 a 7): ");
-        return scanner.nextInt();
+    public int [] pedirCoordenadas(){
+        System.out.print("Digite as coordenadas para escavação: ");
+        int i = scanner.nextInt();
+        int j = scanner.nextInt();
+        return new int[] {i, j};
     }
     public boolean coordenadasValidas(int i, int j){
         return i>=0 && i < 8 && j >=0 && j <8;
