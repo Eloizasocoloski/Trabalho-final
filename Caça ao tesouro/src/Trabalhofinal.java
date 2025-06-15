@@ -75,8 +75,10 @@ public class Trabalhofinal {
     }
     void construirMapa() {
         for (int i = 0; i < 8; i++) {
+        
             for (int j = 0; j < 8; j++) {
                 mapa[i][j] = '~';
+           
             }
         }
     
@@ -105,6 +107,7 @@ public class Trabalhofinal {
 
         }
     }
+<<<<<<< HEAD
     void printarMapaCompleto(){
         System.out.print("Mapa completo: ");
         System.out.print(" ");
@@ -116,11 +119,24 @@ public class Trabalhofinal {
         for(int i=0; i<8; i++){
             System.out.print(i + " ");
             for(int j=0; j<8; j++){
+=======
+
+    static void printarMapa(char[][] mapa) {
+        System.out.print("   ");
+        for (int j = 0; j < 8; j++) System.out.print((j + 1) + " ");
+        System.out.println();
+        for (int i = 0; i < 8; i++) {
+            System.out.print((i + 1) + "  ");
+            for (int j = 0; j < 8; j++) {
+>>>>>>> c2f51fbd89055768e4d2612539125724ef10434f
                 System.out.print(mapa[i][j] + " ");
             }
             System.out.println();
         }
+<<<<<<< HEAD
     }
+=======
+>>>>>>> c2f51fbd89055768e4d2612539125724ef10434f
 
     void construirArmadilhas() {
         int contador = 0;
