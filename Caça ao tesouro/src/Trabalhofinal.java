@@ -61,7 +61,7 @@ public class Trabalhofinal  {
         if (tesourosEncontrados == maxTesouros) {
             System.out.println("Parabéns, você encontrou todos os tesouros!");
         } else if (tentativas == maxTentativas) {
-            System.out.println("Você usou todas as tentativas possíveis.");
+            System.out.println("Você usou todas as tentativas possíveis. Você foi derrotado!");
         }
 
         if (pontuacao >= 70) {
@@ -105,7 +105,8 @@ public class Trabalhofinal  {
                     System.out.print(celula + " ");
                 }
             }
-            System.out.println();
+             System.out.println();
+
         }
     }
 
