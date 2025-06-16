@@ -43,7 +43,7 @@ public class Trabalhofinal  {
                     perderPontos(5);
                     mapa[i][j] = 'a';
 
-                } else if (resultado == 'X') {
+                } else if (resultado == 'O') {
                     System.out.println("Você já escavou aqui antes!");
                 } else {
                     System.out.println("Nada de tesouros por aqui, somente areia...");
