@@ -55,7 +55,6 @@ public class Trabalhofinal  {
             }
             tentativas++;
         }
-        System.out.println("Mapa completo: ");
         printarMapaCompleto();
 
         System.out.println("Pontuação final: " + pontuacao);
@@ -112,7 +111,7 @@ public class Trabalhofinal  {
 
     void printarMapaCompleto() {
         System.out.print("Mapa completo: ");
-        System.out.print(" ");
+        System.out.println();
         for (int j = 0; j < 8; j++) {
             System.out.print(j + " ");
         }
