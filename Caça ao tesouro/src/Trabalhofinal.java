@@ -101,7 +101,7 @@ public class Trabalhofinal  {
                 char celula = mapa[i][j];
                 if (celula == 'T' || celula == 'A') {
                     System.out.print("~ ");
-                } else {
+               } else {
                     System.out.print(celula + " ");
                 }
             }
